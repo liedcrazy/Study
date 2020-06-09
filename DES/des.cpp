@@ -268,7 +268,7 @@ for(i=0;i<8;i++)
 
 char * Des::Encrypt(char *Text1)
 {
-int i,a1,j,nB,m,iB,k,K,B[8],n,t,d,round;
+int i,a1,j,nB,m,iB,k,K,B[8],n,d,round; //t,
 char *Text=new char[1000];
 strcpy(Text,Text1); // Копирование строки
 i=strlen(Text); // Длина строки
@@ -326,7 +326,7 @@ return(final);
 }
 char * Des::Decrypt(char *Text1)
 {
-int i,a1,j,nB,m,iB,k,K,B[8],n,t,d,round;
+int i,j,nB,m,iB,k,K,B[8],n,d,round; //a1,t,
 char *Text=new char[1000];
 unsigned char ch;
 strcpy(Text,Text1);
@@ -335,49 +335,49 @@ keygen();
 int mc=0;
 for(iB=0,nB=0,m=0;m<(strlen(Text)/8);m++) //Repeat for TextLenth/8 times.
 {
-for(iB=0,i=0;i<8;i++,nB++)
-{
- ch=Text[nB];
- n=(int)ch;//(int)Text[nB];
- for(K=7;n>=1;K--)
- {
-  B[K]=n%2;  //Converting 8-Bytes to 64-bit Binary Format
-  n/=2;
- } for(;K>=0;K--) B[K]=0;
-for(K=0;K<8;K++,iB++) total[iB]=B[K]; //Now `total' contains the 64-Bit binary format of 8-Bytes
-}
-IP(); //Performing initial permutation on `total[64]'
-for(i=0;i<64;i++) total[i]=ip[i]; //Store values of ip[64] into total[64]
+    for(iB=0,i=0;i<8;i++,nB++)
+    {
+        ch=Text[nB];
+        n=(int)ch;//(int)Text[nB];
+        for(K=7;n>=1;K--)
+        {
+            B[K]=n%2;  //Converting 8-Bytes to 64-bit Binary Format
+            n/=2;
+        } for(;K>=0;K--) B[K]=0;
+        for(K=0;K<8;K++,iB++) total[iB]=B[K]; //Now `total' contains the 64-Bit binary format of 8-Bytes
+    }
+    IP(); //Performing initial permutation on `total[64]'
+    for(i=0;i<64;i++) total[i]=ip[i]; //Store values of ip[64] into total[64]
 
-for(i=0;i<32;i++) left[i]=total[i]; // 		  +--> left[32]
-                // total[64]--|
-for(;i<64;i++) right[i-32]=total[i];//            +--> right[32]
-for(round=1;round<=16;round++)
-{
-Expansion(); //Performing expansion on `right[32]' to get  `expansion[48]'
-xor_oneD(round);
-substitution();//Perform substitution on xor1[48] to get sub[32]
-permutation(); //Performing Permutation on sub[32] to get p[32]
-xor_two(); //Performing XOR operation on left[32],p[32] to get xor2[32]
-for(i=0;i<32;i++) left[i]=right[i]; //Dumping right[32] into left[32]
-for(i=0;i<32;i++) right[i]=xor2[i]; //Dumping xor2[32] into right[32]
-} //rounds end here
-for(i=0;i<32;i++) temp[i]=right[i]; // Dumping   -->[ swap32bit ]
-for(;i<64;i++) temp[i]=left[i-32];  //    left[32],right[32] into temp[64]
+    for(i=0;i<32;i++) left[i]=total[i]; // 		  +--> left[32]
+    // total[64]--|
+    for(;i<64;i++) right[i-32]=total[i];//            +--> right[32]
+    for(round=1;round<=16;round++)
+    {
+        Expansion(); //Performing expansion on `right[32]' to get  `expansion[48]'
+        xor_oneD(round);
+        substitution();//Perform substitution on xor1[48] to get sub[32]
+        permutation(); //Performing Permutation on sub[32] to get p[32]
+        xor_two(); //Performing XOR operation on left[32],p[32] to get xor2[32]
+        for(i=0;i<32;i++) left[i]=right[i]; //Dumping right[32] into left[32]
+        for(i=0;i<32;i++) right[i]=xor2[i]; //Dumping xor2[32] into right[32]
+    } //rounds end here
+    for(i=0;i<32;i++) temp[i]=right[i]; // Dumping   -->[ swap32bit ]
+    for(;i<64;i++) temp[i]=left[i-32];  //    left[32],right[32] into temp[64]
 
-inverse(); //Inversing the bits of temp[64] to get inv[8][8]
-/* Obtaining the Cypher-Text into final[1000]*/
-   k=128;   d=0;
-for(i=0;i<8;i++)
-{
-  for(j=0;j<8;j++)
-  {
-    d=d+inv[i][j]*k;
-    k=k/2;
-  }
-   final[mc++]=(char)d;
-   k=128;   d=0;
-}
+    inverse(); //Inversing the bits of temp[64] to get inv[8][8]
+    /* Obtaining the Cypher-Text into final[1000]*/
+    k=128;   d=0;
+    for(i=0;i<8;i++)
+    {
+        for(j=0;j<8;j++)
+        {
+            d=d+inv[i][j]*k;
+            k=k/2;
+        }
+        final[mc++]=(char)d;
+        k=128;   d=0;
+    }
 } //for loop ends here
 final[mc]='\0';
 char *final1=new char[1000];
@@ -407,7 +407,7 @@ void Des::keygen() // Генерация 16 ключей
 {
 PermChoice1(); // ген. табл. 5
 
-int i,j,k=0;
+int i,k=0; //j,
 for(i=0;i<28;i++) // Блок С
 {
 ck[i]=pc1[i];
