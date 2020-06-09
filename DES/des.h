@@ -16,7 +16,7 @@ public:
 # include <conio.h>
 # include <iostream>
 # include <cstring>
-
+# include <QString>
 
 
 class Des
@@ -50,7 +50,8 @@ int key[64]={
 1,1,1,1,0,0,0,1
 };
 
-char final[1000];
+//char final[1000];
+QString final;
 void IP();
 void PermChoice1();
 void PermChoice2();
@@ -62,8 +63,8 @@ void xor_oneD(int);
 void substitution();//int newParameter = 14
 void permutation();
 void keygen();
-char * Encrypt(char *);
-char * Decrypt(char *);
+QString Encrypt(QString Text);
+QString Decrypt(QString Text);
 };
 
 

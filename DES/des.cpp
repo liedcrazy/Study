@@ -266,21 +266,22 @@ for(i=0;i<8;i++)
 }
 }
 
-char * Des::Encrypt(char *Text1)
+//char * Des::Encrypt(char *Text1)
+QString Des::Encrypt(QString Text)
 {
 int i,a1,j,nB,m,iB,k,K,B[8],n,d,round; //t,
-char *Text=new char[1000];
-strcpy(Text,Text1); // Копирование строки
-i=strlen(Text); // Длина строки
+//char *Text=new char[1000];
+//strcpy(Text,Text1); // Копирование строки
+i=Text.length(); // Длина строки
 int mc=0;
 a1=i%8;
 if(a1!=0) for(j=0;j<8-a1;j++,i++) Text[i]=' '; Text[i]='\0'; //дополнить текст до 8 байт если меньше
 keygen(); // Генерация 16 ключей в массив keyi
-for(iB=0,nB=0,m=0;m<(strlen(Text)/8);m++) //Repeat for TextLenth/8 times.
+for(iB=0,nB=0,m=0;m<(Text.length()/8);m++) //Repeat for TextLenth/8 times.
 {
     for(iB=0,i=0;i<8;i++,nB++)
     {
-        n=(int)Text[nB];
+        n=Text[nB].toLatin1();
         for(K=7;n>=1;K--)
         {
             B[K]=n%2;  //Converting 8-Bytes to 64-bit Binary Format
@@ -324,21 +325,21 @@ for(iB=0,nB=0,m=0;m<(strlen(Text)/8);m++) //Repeat for TextLenth/8 times.
 final[mc]='\0';
 return(final);
 }
-char * Des::Decrypt(char *Text1)
+QString Des::Decrypt(QString Text)
 {
 int i,j,nB,m,iB,k,K,B[8],n,d,round; //a1,t,
-char *Text=new char[1000];
+//char *Text=new char[1000];
 unsigned char ch;
-strcpy(Text,Text1);
-i=strlen(Text);
+//strcpy(Text,Text);
+i=Text.length();
 keygen();
 int mc=0;
-for(iB=0,nB=0,m=0;m<(strlen(Text)/8);m++) //Repeat for TextLenth/8 times.
+for(iB=0,nB=0,m=0;m<(Text.length()/8);m++) //Repeat for TextLenth/8 times.
 {
     for(iB=0,i=0;i<8;i++,nB++)
     {
-        ch=Text[nB];
-        n=(int)ch;//(int)Text[nB];
+        ch=Text[nB].toLatin1();
+        n=Text[nB].toLatin1();//(int)ch;//(int)Text[nB];
         for(K=7;n>=1;K--)
         {
             B[K]=n%2;  //Converting 8-Bytes to 64-bit Binary Format
@@ -380,9 +381,9 @@ for(iB=0,nB=0,m=0;m<(strlen(Text)/8);m++) //Repeat for TextLenth/8 times.
     }
 } //for loop ends here
 final[mc]='\0';
-char *final1=new char[1000];
-for(i=0,j=strlen(Text);i<strlen(Text);i++,j++)
-final1[i]=final[j]; final1[i]='\0';
+//char *final1=new char[1000];
+//for(i=0,j=Text.length();i<Text.length();i++,j++)
+//final1[i]=final[j]; final1[i]='\0';
 return(final);
 }
 /*
