@@ -37,16 +37,19 @@
        <bool>true</bool>
       </property>
       <property name="focusPolicy">
-       <enum>Qt::TabFocus</enum>
+       <enum>Qt::NoFocus</enum>
       </property>
       <property name="inputMethodHints">
-       <set>Qt::ImhHiddenText|Qt::ImhNoAutoUppercase|Qt::ImhNoPredictiveText|Qt::ImhSensitiveData</set>
+       <set>Qt::ImhNone</set>
+      </property>
+      <property name="text">
+       <string/>
       </property>
       <property name="frame">
        <bool>false</bool>
       </property>
       <property name="echoMode">
-       <enum>QLineEdit::NoEcho</enum>
+       <enum>QLineEdit::Normal</enum>
       </property>
       <property name="readOnly">
        <bool>true</bool>
@@ -60,12 +63,18 @@
         <item>
          <widget class="QLineEdit" name="lineEdit">
           <property name="inputMethodHints">
-           <set>Qt::ImhNone</set>
+           <set>Qt::ImhLatinOnly</set>
+          </property>
+          <property name="clearButtonEnabled">
+           <bool>false</bool>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QPushButton" name="pushButton">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
           <property name="text">
            <string>Шифровать</string>
           </property>
@@ -76,10 +85,17 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QLineEdit" name="lineEdit_2"/>
+         <widget class="QLineEdit" name="lineEdit_2">
+          <property name="inputMethodHints">
+           <set>Qt::ImhLatinOnly</set>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QPushButton" name="pushButton_2">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
           <property name="text">
            <string>Дешифровать</string>
           </property>
@@ -114,7 +130,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_4"/>
+         <widget class="QLineEdit" name="lineEdit_4">
+          <property name="inputMethodHints">
+           <set>Qt::ImhLatinOnly</set>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>

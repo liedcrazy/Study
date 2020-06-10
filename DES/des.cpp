@@ -267,10 +267,13 @@ for(i=0;i<8;i++)
 }
 
 //char * Des::Encrypt(char *Text1)
-QString Des::Encrypt(QString Text)
+QString Des::Encrypt(QString Text) //надо проверить , не работает
 {
 int i,a1,j,nB,m,iB,k,K,B[8],n,d,round; //t,
-//char *Text=new char[1000];
+char *Text1=new  char[Text.length()];
+for (i=0;i<Text.length();i++) {
+    Text1[i] = Text[i].toLatin1();
+}
 //strcpy(Text,Text1); // Копирование строки
 i=Text.length(); // Длина строки
 int mc=0;
