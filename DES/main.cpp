@@ -1,4 +1,5 @@
 #include <QCoreApplication>
+# include <iostream>
 #include <des.h>
 
 using namespace std;
